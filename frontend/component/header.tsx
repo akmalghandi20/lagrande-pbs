@@ -4,7 +4,7 @@ import Navbar from "./navbar";
 export default function Header() {
   return (
     <header
-      style={{ backgroundColor: "#f3f3f3", padding: "1rem" }}
+      style={{ backgroundColor: "#E8D8D8", padding: "1rem" }}
     >
       <div
         style={{

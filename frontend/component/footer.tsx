@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <footer style={{backgroundColor: '#f3f3f3', 
+    <footer style={{backgroundColor: "#E8D8D8", 
     padding: '1rem',
     marginTop: '2rem',
     }}>
