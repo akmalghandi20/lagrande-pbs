@@ -24,7 +24,7 @@ model tb_user {
 model tb_menu {
   id             Int    @id @default(autoincrement())
   nama_menu      String @db.VarChar(50)
-  harga          Int
+  harga_menu     Int
   deskripsi_menu String @db.VarChar(50)
-  gambar         String 
+  gambar         String @db.VarChar(255)
 }
