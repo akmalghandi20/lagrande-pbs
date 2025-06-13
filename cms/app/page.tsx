@@ -1,6 +1,28 @@
-import Image from "next/image";
+"use client";
 
-export default function Home() {
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useState } from "react";
+
+export default function LoginPage() {
+  const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (email === "admin@gmail.com" && password === "123456") {
+      const username = email.split("@")[0];
+      if (typeof window !== "undefined") {
+        localStorage.setItem("username", username);
+      }
+      router.push("/dashboard");
+    } else {
+      alert("Email atau password salah!");
+    }
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md">
@@ -14,7 +36,7 @@ export default function Home() {
           <h1 className="text-2xl font-bold mt-2">Login ke WARMASKIN</h1>
         </div>
 
-        <form className="space-y-4">
+        <form className="space-y-4" onSubmit={handleLogin}>
           <div>
             <label
               htmlFor="email"
@@ -26,7 +48,8 @@ export default function Home() {
               type="email"
               id="email"
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="email@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
 
@@ -41,7 +64,8 @@ export default function Home() {
               type="password"
               id="password"
               className="mt-1 w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              placeholder="••••••••"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
@@ -52,13 +76,6 @@ export default function Home() {
             Login
           </button>
         </form>
-
-        <p className="text-center text-sm text-gray-600 mt-4">
-          Belum punya akun?{" "}
-          <a href="#" className="text-blue-600 hover:underline">
-            Daftar
-          </a>
-        </p>
       </div>
     </div>
   );
