@@ -21,12 +21,16 @@ export default function Header() {
   return (
     <header className="fixed top-0 left-0 w-full bg-gray-100 p-4 flex items-center justify-between shadow-sm border-b border-gray-300 z-50">
       <div className="flex items-center">
-        <Image
-          src="/warmaskin.png"
-          alt="WARMASKIN Logo"
-          width={50}
-          height={50}
-        />
+        <div className="w-[50px] h-auto">
+          <Image
+            src="/warmaskin.png"
+            alt="WARMASKIN Logo"
+            width={50}
+            height={50}
+            className="h-auto w-full"
+            style={{ objectFit: "contain" }}
+          />
+        </div>
         <h1 className="ml-4 text-xl font-bold">WARMASKIN</h1>
       </div>
 
