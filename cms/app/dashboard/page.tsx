@@ -27,15 +27,27 @@ export default function DashboardPage() {
 
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 mb-6">
           {/* Stats Cards */}
-          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">Total Sales</div>
-          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">Order Count</div>
-          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">Customer Count</div>
-          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">Online Orders</div>
+          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">
+            Total Sales
+          </div>
+          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">
+            Order Count
+          </div>
+          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">
+            Customer Count
+          </div>
+          <div className="bg-white p-4 rounded-md shadow flex items-center justify-center">
+            Online Orders
+          </div>
         </section>
 
         <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-white p-4 rounded-md shadow col-span-2">Sales Chart & Best Sellers</div>
-          <div className="bg-white p-4 rounded-md shadow">Order Management Table</div>
+          <div className="bg-white p-4 rounded-md shadow col-span-2">
+            Sales Chart & Best Sellers
+          </div>
+          <div className="bg-white p-4 rounded-md shadow">
+            Order Management Table
+          </div>
         </section>
       </main>
     </div>
