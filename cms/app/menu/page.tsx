@@ -51,7 +51,6 @@ export default function MenuPage() {
         method: "DELETE",
       });
       if (!res.ok) throw new Error("Gagal menghapus");
-      // Hapus data dari state
       setMenuData((prev) => prev.filter((m) => m.id !== item.id));
     } catch (err) {
       console.error(err);
@@ -75,63 +74,67 @@ export default function MenuPage() {
         </div>
 
         <div className="overflow-x-auto bg-white rounded-lg shadow">
-          <table className="min-w-full table-auto">
-            <thead className="bg-gray-200">
-              <tr>
-                <th className="px-4 py-2 text-left">#</th>
-                <th className="px-4 py-2 text-left">Gambar</th>
-                <th className="px-4 py-2 text-left">Nama Menu</th>
-                <th className="px-4 py-2 text-left">Deskripsi</th>
-                <th className="px-4 py-2 text-right">Harga (IDR)</th>
-                <th className="px-4 py-2 text-center">Aksi</th>
-              </tr>
-            </thead>
-            <tbody>
-              {menuData.map((item, idx) => (
-                <tr
-                  key={item.id}
-                  className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
-                >
-                  <td className="px-4 py-3">{idx + 1}</td>
-                  <td className="px-4 py-3">
-                    {item.gambar ? (
-                      <Image
-                        src={item.gambar}
-                        alt={item.nama_menu || "Menu image"}
-                        width={50}
-                        height={50}
-                        className="rounded"
-                      />
-                    ) : (
-                      <div
-                        className="w-12 h-12 bg-gray-200 rounded"
-                        aria-hidden="true"
-                      />
-                    )}
-                  </td>
-                  <td className="px-4 py-3">{item.nama_menu}</td>
-                  <td className="px-4 py-3">{item.deskripsi_menu}</td>
-                  <td className="px-4 py-3 text-right">
-                    {item.harga_menu.toLocaleString("id-ID")}
-                  </td>
-                  <td className="px-4 py-3 text-center space-x-2">
-                    <button
-                      className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
-                      onClick={() => handleEdit(item.id)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm"
-                      onClick={() => handleDelete(item)}
-                    >
-                      Hapus
-                    </button>
-                  </td>
+          {menuData.length > 0 ? (
+            <table className="min-w-full table-auto">
+              <thead className="bg-gray-200">
+                <tr>
+                  <th className="px-4 py-2 text-left">No</th>
+                  <th className="px-4 py-2 text-left">Gambar</th>
+                  <th className="px-4 py-2 text-left">Nama Menu</th>
+                  <th className="px-4 py-2 text-left">Deskripsi</th>
+                  <th className="px-4 py-2 text-right">Harga (IDR)</th>
+                  <th className="px-4 py-2 text-center">Aksi</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {menuData.map((item, idx) => (
+                  <tr
+                    key={item.id}
+                    className={idx % 2 === 0 ? "bg-white" : "bg-gray-50"}
+                  >
+                    <td className="px-4 py-3">{idx + 1}</td>
+                    <td className="px-4 py-3">
+                      {item.gambar ? (
+                        <Image
+                          src={item.gambar}
+                          alt={item.nama_menu || "Menu image"}
+                          width={50}
+                          height={50}
+                          className="rounded"
+                        />
+                      ) : (
+                        <div
+                          className="w-12 h-12 bg-gray-200 rounded"
+                          aria-hidden="true"
+                        />
+                      )}
+                    </td>
+                    <td className="px-4 py-3">{item.nama_menu}</td>
+                    <td className="px-4 py-3">{item.deskripsi_menu}</td>
+                    <td className="px-4 py-3 text-right">
+                      Rp. {item.harga_menu.toLocaleString("id-ID")}
+                    </td>
+                    <td className="px-4 py-3 text-center space-x-2">
+                      <button
+                        className="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded-md text-sm"
+                        onClick={() => handleEdit(item.id)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-md text-sm"
+                        onClick={() => handleDelete(item)}
+                      >
+                        Hapus
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <p className="text-center my-5">Belum Ada Data</p>
+          )}
         </div>
       </main>
     </div>
