@@ -3,6 +3,7 @@ import Sidebar from "@/component/sidebar";
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type MenuItem = {
   id: number;
@@ -15,6 +16,7 @@ type MenuItem = {
 export default function MenuPage() {
   const [menuData, setMenuData] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     async function fetchMenu() {
@@ -36,13 +38,24 @@ export default function MenuPage() {
   }, []);
 
   const handleEdit = (id: number) => {
-    // Move to edit route, e.g. /menu/[id]/edit
-    console.log("Edit", id);
+    // Pindah ke halaman edit untuk menu dengan ID tertentu
+    router.push(`/menu/${id}`);
   };
 
-  const handleDelete = (item: MenuItem) => {
-    if (confirm(`Hapus menu "${item.nama_menu}"?`)) {
-      console.log("Deleted", item.id);
+  const handleDelete = async (item: MenuItem) => {
+    const ok = confirm(`Hapus menu "${item.nama_menu}"?`);
+    if (!ok) return;
+
+    try {
+      const res = await fetch(`http://localhost:3001/api/menu/${item.id}`, {
+        method: "DELETE",
+      });
+      if (!res.ok) throw new Error("Gagal menghapus");
+      // Hapus data dari state
+      setMenuData((prev) => prev.filter((m) => m.id !== item.id));
+    } catch (err) {
+      console.error(err);
+      alert("Gagal menghapus menu");
     }
   };
 
