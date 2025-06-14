@@ -3,17 +3,16 @@
 import { useState } from "react";
 
 interface SignUpProps {
-  onSignUp: (username: string, password: string, role: string) => void;
+  onSignUp: (username: string, password: string) => void;
 }
 
 export default function SignUpForm({ onSignUp }: SignUpProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("user");
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    onSignUp(username, password, role);
+    onSignUp(username, password);
   }
 
   return (
@@ -47,19 +46,6 @@ export default function SignUpForm({ onSignUp }: SignUpProps) {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-        </div>
-        <div className="mb-6">
-          <label className="block text-sm font-medium text-gray-600 mb-1">
-            Role
-          </label>
-          <select
-            value={role}
-            onChange={(e) => setRole(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-          >
-            <option value="user">User</option>
-            <option value="admin">Admin</option>
-          </select>
         </div>
         <button
           type="submit"

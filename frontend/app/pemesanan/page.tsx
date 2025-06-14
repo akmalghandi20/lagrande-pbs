@@ -49,6 +49,7 @@ export default function Pemesanan() {
           <label className="block text-gray-600 mb-1">Nama Pemesan</label>
           <input
             type="text"
+            placeholder="Nama Pemesan"
             value={namaPemesan}
             onChange={(e) => setNamaPemesan(e.target.value)}
             required

@@ -9,37 +9,30 @@ export default function SignIn() {
   const [showSignUp, setShowSignUp] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState("");
-  const [role, setRole] = useState("");
 
   useEffect(() => {
     const savedUser = localStorage.getItem("username");
-    const savedRole = localStorage.getItem("role");
-    if (savedUser && savedRole) {
+    if (savedUser) {
       setUsername(savedUser);
-      setRole(savedRole);
       setIsLoggedIn(true);
     }
   }, []);
 
   function handleLogin(user: string, pass: string) {
     setUsername(user);
-    setRole("user");
     setIsLoggedIn(true);
     setShowModal(false);
-    localStorage.setItem("username", user);
-    localStorage.setItem("role", "user");
+    localStorage.setItem("username", user); 
   }
 
-  function handleSignUp(user: string, pass: string, userRole: string) {
-    alert(`Akun untuk ${user} berhasil dibuat sebagai ${userRole}!`);
+  function handleSignUp(user: string, pass: string) {
+    alert(`Akun untuk ${user} berhasil Dibuat}!`);
     setShowSignUp(false);
   }
 
   function handleLogout() {
     localStorage.removeItem("username");
-    localStorage.removeItem("role");
     setUsername("");
-    setRole("");
     setIsLoggedIn(false);
   }
 
@@ -48,7 +41,7 @@ export default function SignIn() {
       {isLoggedIn ? (
         <div className="flex items-center space-x-4">
           <span className="text-gray-800 font-semibold">
-            {role === "admin" ? `Halo Admin ${username}` : `Halo, ${username}`}
+            Halo {username}
           </span>
           <button
             onClick={handleLogout}
