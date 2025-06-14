@@ -44,49 +44,69 @@ export default function SignIn() {
   }
 
   return (
-    <div>
-        {isLoggedIn ? (
-            <div>
-                <span>
-                    {role === "admin" ? `Halo Admin ${username}` : `Halo, ${username}`}
-                </span>
-                <button 
-                    onClick={handleLogout}
-                    >
-                    Logout
+    <div className="relative">
+      {isLoggedIn ? (
+        <div className="flex items-center space-x-4">
+          <span className="text-gray-800 font-semibold">
+            {role === "admin" ? `Halo Admin ${username}` : `Halo, ${username}`}
+          </span>
+          <button
+            onClick={handleLogout}
+            className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
+          >
+            Logout
+          </button>
+        </div>
+      ) : (
+        <>
+          <button
+            onClick={() => setShowModal(true)}
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+          >
+            Sign In
+          </button>
+          {showModal && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+              <div
+                className="bg-white rounded-lg p-6 w-full max-w-lg relative"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setShowModal(false)}
+                  className="absolute top-2 right-2 text-gray-500 hover:text-gray-700 text-xl"
+                >
+                  &times;
                 </button>
+                {showSignUp ? (
+                  <>
+                    <SignUpForm onSignUp={handleSignUp} />
+                    <p className="mt-4 text-center">
+                      Sudah punya akun?{" "}
+                      <button
+                        onClick={() => setShowSignUp(false)}
+                        className="text-blue-600 hover:underline"
+                      >
+                        Masuk
+                      </button>
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <LoginForm onLogin={handleLogin} />
+                    <p className="mt-4 text-center">
+                      Belum punya akun?{" "}
+                      <button onClick={() => setShowSignUp(true)}
+                        className="text-blue-600 hover:underline"
+                        >
+                        Buat Akun
+                      </button>
+                    </p>
+                  </>
+                )}
+              </div>
             </div>
-
-        ) : (
-      <>
-        <button onClick={() => setShowModal(true)}>Sign In</button>
-        {showModal && (
-          <div>
-            <div>
-              <button onClick={() => setShowModal(false)}>&times;</button>
-              {showSignUp ? (
-                <>
-                  <SignUpForm onSignUp={handleSignUp} />
-                  <p>
-                    Sudah punya akun?{" "}
-                    <button onClick={() => setShowSignUp(false)}>Masuk</button>
-                  </p>
-                </>
-              ) : (
-                <>
-                  <LoginForm onLogin={handleLogin} />
-                  <p>
-                    Belum punya akun?{" "}
-                    <button onClick={() => setShowSignUp(true)}>
-                      Buat Akun
-                    </button>
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-        )}
-      </>
+          )}
+        </>
       )}
     </div>
   );
