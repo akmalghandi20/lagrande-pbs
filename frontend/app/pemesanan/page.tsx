@@ -100,6 +100,19 @@ export default function Pemesanan() {
             + Tambah Menu
           </button>
         </div>
+        <div>
+          <p>
+            <strong>
+              Total Pesanan
+            </strong>
+
+          </p>
+          <p>
+            <strong>
+              Total Harga
+            </strong>
+          </p>
+        </div>
 
         <button
           type="submit"
