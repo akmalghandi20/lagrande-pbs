@@ -26,96 +26,88 @@ export default function Pemesanan() {
     e.preventDefault();
     const detailPesanan = menuItems
       .map((item) => `${item.namaMenu} (${item.jumlah})`)
-      .join(", ");
-    alert(`Pesanan dari ${namaPemesan}: ${detailPesanan}`);
-    setNamaPemesan("");
-    setMenuItems([{ namaMenu: "", jumlah: 1 }]);
+      .join(', ');
+    alert(`Kamu telah memesan ${detailPesanan}`);
+    setNamaPemesan('');
+    setMenuItems([{ namaMenu: '', jumlah: 1 }]);
   };
 
-  const handleMenuChange = (
-    index: number,
-    field: keyof MenuItem,
-    value: string | number
-  ) => {
+  const handleMenuChange = (index: number, field: keyof MenuItem, value: string | number) => {
     const updated = [...menuItems];
-    updated[index][field] = field === "jumlah" ? Number(value) : String(value);
+    updated[index][field] = field === 'jumlah' ? Number(value) : String(value);
     setMenuItems(updated);
   };
 
   return (
-    <div>
-      <h1>Pemesanan</h1>
+    <div className="h-screen w-full flex items-center justify-center bg-gray-100">
+      <div className="w-full max-w-3xl p-8 bg-white rounded-2xl shadow-lg">
+      <h1 className="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Pemesanan
+      </h1>
       <form onSubmit={handleSubmit}>
         <div>
-          <label>Nama Pemesan</label>
+          <label className="block text-gray-600 mb-1">Nama Pemesan</label>
           <input
             type="text"
             value={namaPemesan}
             onChange={(e) => setNamaPemesan(e.target.value)}
             required
+            className="w-full px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500  mb-3"
           />
         </div>
 
         {menuItems.map((item, index) => (
-          <div key={index}>
+          <div key={index} className="flex gap-2 items-center">
             <input
               type="text"
               placeholder="Nama Menu"
               value={item.namaMenu}
-              onChange={(e) => {
-                const updated = [...menuItems];
-                updated[index].namaMenu = e.target.value;
-                setMenuItems(updated);
-              }}
+              onChange={(e) =>
+                handleMenuChange(index, "namaMenu", e.target.value)
+              }
+              required
+              className="flex-1 px-4 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 mb-3"
             />
             <input
               type="number"
               min={1}
               value={item.jumlah}
-              onChange={(e) => {
-                const updated = [...menuItems];
-                updated[index].jumlah = Number(e.target.value);
-                setMenuItems(updated);
-              }}
+              onChange={(e) =>
+                handleMenuChange(index, "jumlah", e.target.value)
+              }
+              required
+              className="w-24 px-3 py-2 border rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
-
             {menuItems.length > 1 && (
-              <div>
-                <input
-                  type="text"
-                  placeholder="Nama Menu"
-                  value={item.namaMenu}
-                  onChange={(e) =>
-                    handleMenuChange(index, "namaMenu", e.target.value)
-                  }
-                  required
-                />
-                <input
-                  type="number"
-                  min={1}
-                  value={item.jumlah}
-                  onChange={(e) =>
-                    handleMenuChange(index, "jumlah", e.target.value)
-                  }
-                  required
-                />
-
-                <button type="button" onClick={() => handleRemoveMenu(index)}>
-                  &times;
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={() => handleRemoveMenu(index)}
+                className="text-red-600 hover:text-red-800 font-bold text-lg"
+              >
+                &times;
+              </button>
             )}
           </div>
         ))}
 
-        <div>
-          <button type="button" onClick={handleAddMenu}>
+        <div className="flex justify-between">
+          <button
+            type="button"
+            onClick={handleAddMenu}
+            className="text-blue-600 font-medium hover:underline mb-3"
+          >
             + Tambah Menu
           </button>
         </div>
 
-        <button type="submit">Pesan Sekarang</button>
+        <button
+          type="submit"
+          className="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-xl hover:bg-blue-700 transition duration-300"
+        >
+          Pesan Sekarang
+        </button>
       </form>
+      </div>
     </div>
   );
 }
