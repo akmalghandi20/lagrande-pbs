@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { menuList } from "@/datatest/menu"; // Pastikan menuList formatnya: { nama: string, harga: number }
 
 interface MenuItem {
   namaMenu: string;
