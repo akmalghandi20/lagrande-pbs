@@ -8,6 +8,10 @@ export default function Pemesanan() {
     { namaMenu: "", jumlah: 1 },
   ]);
 
+  const handleAddMenu = () => {
+  setMenuItems([...menuItems, { namaMenu: '', jumlah: 1 }]);
+};
+
   return (
     <div>
       <h1>Pemesanan</h1>
@@ -46,6 +50,13 @@ export default function Pemesanan() {
             />
           </div>
         ))}
+
+        <div>
+          <button type="button" onClick={handleAddMenu}>
+            + Tambah Menu
+          </button>
+        </div>
+        
       </form>
     </div>
   );
