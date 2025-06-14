@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 export default function Pemesanan() {
-  const [namaPesanan, setNamaPesanan] = useState("");
+  const [namaPemesan, setNamaPemesan] = useState("");
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
     { namaMenu: "", jumlah: 1 },
   ]);
@@ -17,16 +17,26 @@ export default function Pemesanan() {
     setMenuItems(updated);
   };
 
+    const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const detailPesanan = menuItems
+      .map((item) => `${item.namaMenu} (${item.jumlah})`)
+      .join(', ');
+    alert(`Pesanan dari ${namaPemesan}: ${detailPesanan}`);
+    setNamaPemesan('');
+    setMenuItems([{ namaMenu: '', jumlah: 1 }]);
+  };
+
   return (
     <div>
       <h1>Pemesanan</h1>
-      <form>
+      <form  onSubmit={handleSubmit} >
         <div>
-          <label>Nama Pesanan</label>
+          <label>Nama Pemesan</label>
           <input
             type="text"
-            value={namaPesanan}
-            onChange={(e) => setNamaPesanan(e.target.value)}
+            value={namaPemesan}
+            onChange={(e) => setNamaPemesan(e.target.value)}
             required
           />
         </div>
@@ -67,6 +77,13 @@ export default function Pemesanan() {
             + Tambah Menu
           </button>
         </div>
+
+        <button
+          type="submit"
+        >
+          
+          Pesan Sekarang
+        </button>
       </form>
     </div>
   );
