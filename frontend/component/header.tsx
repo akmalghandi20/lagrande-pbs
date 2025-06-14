@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Navbar from "./navbar";
+import SignInButton from "./signin";
 
 export default function Header() {
   return (
@@ -27,6 +28,7 @@ export default function Header() {
           }}
         >
           <Navbar />
+          <SignInButton />
         </div>
       </div>
     </header>
