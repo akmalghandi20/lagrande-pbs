@@ -9,8 +9,13 @@ export default function Pemesanan() {
   ]);
 
   const handleAddMenu = () => {
-  setMenuItems([...menuItems, { namaMenu: '', jumlah: 1 }]);
-};
+    setMenuItems([...menuItems, { namaMenu: "", jumlah: 1 }]);
+  };
+
+  const handleRemoveMenu = (index: number) => {
+    const updated = menuItems.filter((_, i) => i !== index);
+    setMenuItems(updated);
+  };
 
   return (
     <div>
@@ -48,6 +53,12 @@ export default function Pemesanan() {
                 setMenuItems(updated);
               }}
             />
+
+            {menuItems.length > 1 && (
+              <button type="button" onClick={() => handleRemoveMenu(index)}>
+                &times;
+              </button>
+            )}
           </div>
         ))}
 
@@ -56,7 +67,6 @@ export default function Pemesanan() {
             + Tambah Menu
           </button>
         </div>
-        
       </form>
     </div>
   );
