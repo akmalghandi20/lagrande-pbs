@@ -28,5 +28,4 @@ model tb_pesanan {
   nama_pemesan String @db.VarChar(50)
   nama_menu    String @db.VarChar(50)
   jumlah       Int
-  total_harga  Int
 }
