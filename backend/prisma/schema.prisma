@@ -16,9 +16,17 @@ model tb_user {
 }
 
 model tb_menu {
-  id             Int    @id @default(autoincrement())
-  nama_menu      String @db.VarChar(50)
-  harga_menu     Int 
-  deskripsi_menu String @db.VarChar(50)
+  id             Int     @id @default(autoincrement())
+  nama_menu      String  @db.VarChar(50)
+  harga_menu     Int
+  deskripsi_menu String  @db.VarChar(50)
   gambar         String?
+}
+
+model tb_pesanan {
+  id           Int    @id @default(autoincrement())
+  nama_pemesan String @db.VarChar(50)
+  nama_menu    String @db.VarChar(50)
+  jumlah       Int
+  total_harga  Int
 }
