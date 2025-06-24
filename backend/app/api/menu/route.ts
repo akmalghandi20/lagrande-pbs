@@ -42,12 +42,8 @@ export const GET = async () => {
 
 // buat service POST (tb_menu) untuk simpan data
 export const POST = async (request: NextRequest) => {
-  const formData = await request.formData();
-  const nama_menu = formData.get("nama_menu") as string;
-  const deskripsi_menu = formData.get("deskripsi_menu") as string;
-  const harga_menu = Number(formData.get("harga_menu"));
-  const gambarValue = formData.get("gambar");
-  const gambar = typeof gambarValue === "string" ? gambarValue : null;
+    const { nama_menu, deskripsi_menu, gambar, harga_menu } = await request.json();
+
 
   // cek apakah nama_menu sudah pernah digunakan
   const check = await prisma.tb_menu.findMany({
@@ -89,7 +85,7 @@ export const POST = async (request: NextRequest) => {
         message: process.env.MENU_ADDED_MESSAGE,
         status: 201,
       },
-      // data_menu: save,
+      data_menu: save,
     },
     {
       status: 201,

@@ -149,11 +149,7 @@ export const PUT = async (
   }
 
   // Ganti field sesuai dengan struktur tb_menu Anda
-  const formData = await request.formData();
-  const nama_menu = formData.get("nama_menu") as string;
-  const deskripsi_menu = formData.get("deskripsi_menu") as string;
-  const harga_menu = Number(formData.get("harga_menu"));
-
+  const { nama_menu, deskripsi_menu, harga_menu } = await request.json();
   // Jika ingin cek duplikasi nama_menu, bisa tambahkan pengecekan di sini
 
   await prisma.tb_menu.update({
