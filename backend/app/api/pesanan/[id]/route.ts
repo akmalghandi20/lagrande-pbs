@@ -149,10 +149,7 @@ export const PUT = async (
     }
 
     // Ganti field sesuai dengan struktur tb_pesanan Anda
-    const formData = await request.formData();
-    const nama_pemesan = formData.get("nama_pemesan") as string;
-    const total_harga = Number(formData.get("total_harga"));
-    const status_pesanan = formData.get("status_pesanan") as string;
+    const { nama_pemesan, nama_menu, jumlah } = await request.json();
 
     await prisma.tb_pesanan.update({
         where: {
@@ -160,8 +157,8 @@ export const PUT = async (
         },
         data: {
             nama_pemesan,
-            total_harga,
-            status_pesanan,
+            nama_menu,
+            jumlah,
         },
     });
 
@@ -169,7 +166,7 @@ export const PUT = async (
         {
             metaData: {
                 error: 0,
-                message: process.env.PESANAN_UPDATED_MESSAGE,
+                message: process.env.PESANAN_UPDATE_MESSAGE,
                 status: 200,
             },
         },
