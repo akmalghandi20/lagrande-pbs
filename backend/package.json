@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^6.8.2",
+    "@prisma/client": "^6.10.1",
     "@types/jsonwebtoken": "^9.0.9",
     "bcrypt-ts": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
