@@ -33,9 +33,54 @@ export default function HomePage() {
               <li>Minggu : 10.00 - 23.00</li>
             </ul>
           </div>
-
         </div>
       </div>
+    </div>
+    <div>
+      <h2>
+        Best Seller
+      </h2>
+    <div>
+      <div>
+        <Image
+          src="/home.JPG"
+          alt="Americano"
+          width={300}
+          height={200}
+        />
+        <div>
+          <h3>
+            Americano
+          </h3>
+        </div>
+      </div>
+            <div>
+        <Image
+          src="/home.JPG"
+          alt="Kopi Susu"
+          width={300}
+          height={200}
+        />
+        <div>
+          <h3>
+            Kopi Susu
+          </h3>
+        </div>
+      </div>
+            <div>
+        <Image
+          src="/home.JPG"
+          alt=""
+          width={300}
+          height={200}
+        />
+        <div>
+          <h3>
+            Latte
+          </h3>
+        </div>
+      </div>
+    </div>
     </div>
   </div>
   );
