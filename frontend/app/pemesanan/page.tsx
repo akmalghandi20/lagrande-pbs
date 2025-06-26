@@ -23,12 +23,38 @@ export default function Pemesanan() {
     setMenuItems(updatedItems);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert(`Pesanan dari ${namaPemesan}`);
+    try {
+      for (const item of menuItems) {
+        const response = await fetch("/api/pesanan", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            nama_pemesan: namaPemesan,
+            nama_menu: item.namaMenu,
+            jumlah: item.jumlah,
+          }),
+        });
 
-    setNamaPemesan("");
-    setMenuItems([{ namaMenu: "", jumlah: 1 }]);
+        const result = await response.json();
+
+        if (!response.ok || result.metaData?.error !== 0) {
+          alert(`Gagal menyimpan pesanan: ${result.metaData?.message}`);
+          return;
+        }
+      }
+
+      alert("Pesanan berhasil dikirim!");
+
+      setNamaPemesan("");
+      setMenuItems([{ namaMenu: "", jumlah: 1 }]);
+    } catch (error) {
+      console.error("Terjadi kesalahan:", error);
+      alert("Gagal menghubungi server.");
+    }
   };
 
   const handleMenuChange = (
@@ -123,4 +149,4 @@ export default function Pemesanan() {
       </div>
     </div>
   );
-}
+
