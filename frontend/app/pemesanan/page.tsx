@@ -5,41 +5,30 @@ import { useState } from "react";
 interface MenuItem {
   namaMenu: string;
   jumlah: number;
-  harga: number;
 }
 
 export default function Pemesanan() {
   const [namaPemesan, setNamaPemesan] = useState("");
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
-    { namaMenu: "", jumlah: 1, harga: 0 },
+    { namaMenu: "", jumlah: 1 },
   ]);
-  const [rekomendasi, setRekomendasi] = useState<string[][]>([[]]);
 
   const handleAddMenu = () => {
-    setMenuItems([...menuItems, { namaMenu: "", jumlah: 1, harga: 0 }]);
-    setRekomendasi([...rekomendasi, []]);
+    setMenuItems([...menuItems, { namaMenu: "", jumlah: 1 }]);
   };
 
   const handleRemoveMenu = (index: number) => {
     const updatedItems = [...menuItems];
-    const updatedRekom = [...rekomendasi];
     updatedItems.splice(index, 1);
-    updatedRekom.splice(index, 1);
     setMenuItems(updatedItems);
-    setRekomendasi(updatedRekom);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    alert(
-      `Pesanan dari ${namaPemesan}\nTotal: Rp${totalHarga.toLocaleString(
-        "id-ID"
-      )}`
-    );
+    alert(`Pesanan dari ${namaPemesan}`);
 
     setNamaPemesan("");
-    setMenuItems([{ namaMenu: "", jumlah: 1, harga: 0 }]);
-    setRekomendasi([[]]);
+    setMenuItems([{ namaMenu: "", jumlah: 1 }]);
   };
 
   const handleMenuChange = (
@@ -48,45 +37,15 @@ export default function Pemesanan() {
     value: string | number
   ) => {
     const updated = [...menuItems];
-    const updatedRekom = [...rekomendasi];
 
     if (field === "namaMenu") {
-      const val = String(value);
-      updated[index].namaMenu = val;
-      const matched = menuList.find(
-        (m) => m.nama.toLowerCase() === val.toLowerCase()
-      );
-      updated[index].harga = matched ? matched.harga : 0;
-      updatedRekom[index] = menuList
-        .filter((m) => m.nama.toLowerCase().includes(val.toLowerCase()) && val)
-        .slice(0, 5)
-        .map((m) => m.nama);
+      updated[index].namaMenu = String(value);
     } else if (field === "jumlah") {
       updated[index].jumlah = Number(value);
     }
 
     setMenuItems(updated);
-    setRekomendasi(updatedRekom);
   };
-
-  const handleSelectRekomendasi = (index: number, nama: string) => {
-    const updated = [...menuItems];
-    const matched = menuList.find((m) => m.nama === nama);
-    updated[index].namaMenu = nama;
-    updated[index].harga = matched ? matched.harga : 0;
-
-    setMenuItems(updated);
-
-    const updatedRekom = [...rekomendasi];
-    updatedRekom[index] = [];
-    setRekomendasi(updatedRekom);
-  };
-
-  const totalJumlah = menuItems.reduce((acc, item) => acc + item.jumlah, 0);
-  const totalHarga = menuItems.reduce(
-    (acc, item) => acc + item.jumlah * item.harga,
-    0
-  );
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gray-100">
@@ -109,7 +68,7 @@ export default function Pemesanan() {
           </div>
 
           {menuItems.map((item, index) => (
-            <div key={index} className="relative mb-4">
+            <div key={index} className="mb-4">
               <div className="flex gap-2 items-center">
                 <input
                   type="text"
@@ -141,20 +100,6 @@ export default function Pemesanan() {
                   </button>
                 )}
               </div>
-
-              {rekomendasi[index]?.length > 0 && (
-                <ul className="absolute z-10 bg-white border mt-1 w-full rounded-xl shadow-md max-h-40 overflow-y-auto">
-                  {rekomendasi[index].map((nama, i) => (
-                    <li
-                      key={i}
-                      onClick={() => handleSelectRekomendasi(index, nama)}
-                      className="px-4 py-2 hover:bg-blue-100 cursor-pointer"
-                    >
-                      {nama}
-                    </li>
-                  ))}
-                </ul>
-              )}
             </div>
           ))}
 
@@ -166,15 +111,6 @@ export default function Pemesanan() {
             >
               + Tambah Menu
             </button>
-          </div>
-          <div className="p-4 bg-gray-50 rounded-lg border">
-            <p>
-              <strong>Total Pesanan : </strong> {totalJumlah}
-            </p>
-            <p>
-              <strong>Total Harga : </strong> Rp
-              {totalHarga.toLocaleString("id-ID")}
-            </p>
           </div>
 
           <button
