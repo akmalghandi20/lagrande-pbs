@@ -86,13 +86,13 @@ export default function Pemesanan() {
 
   return (
     <div className="h-screen w-full flex items-center justify-center bg-gradient-to-br from-yellow-50 via-orange-50 to-brown-100">
-      <div className="w-full max-w-3xl p-10 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-950 rounded-3xl shadow-2xl border border-blue-700/30 backdrop-blur-lg">
-        <h1 className="text-3xl font-extrabold text-cyan-400 mb-8 text-center tracking-widest drop-shadow-lg">
+      <div className="w-full max-w-3xl p-10 bg-gradient-to-br from-yellow-50 via-orange-50 to-brown-100 rounded-3xl shadow-2xl border border-gray-200/30 backdrop-blur-lg">
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-8 text-center tracking-widest drop-shadow-lg">
           Pemesanan
         </h1>
         <form onSubmit={handleSubmit}>
           <div>
-        <label className="block text-cyan-300 mb-2 font-medium tracking-wide">Nama Pemesan</label>
+        <label className="block text-gray-700 mb-2 font-medium tracking-wide">Nama Pemesan</label>
         <input
           type="text"
           placeholder="Nama Pemesan"
@@ -100,43 +100,43 @@ export default function Pemesanan() {
           onChange={(e) => setNamaPemesan(e.target.value)}
           required
           autoComplete="off"
-          className="w-full px-5 py-3 bg-gray-800 border border-cyan-500/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-cyan-100 placeholder-cyan-500 shadow-inner mb-4 transition"
+          className="w-full px-5 py-3 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-200 text-gray-800 placeholder-gray-400 shadow-inner mb-4 transition"
         />
           </div>
 
           {menuItems.map((item, index) => (
         <div key={index} className="mb-5">
           <div className="flex gap-3 items-center">
-            <input
+        <input
           type="text"
           placeholder="Nama Menu"
           value={item.namaMenu}
           onChange={(e) =>
-            handleMenuChange(index, "namaMenu", e.target.value)
+        handleMenuChange(index, "namaMenu", e.target.value)
           }
           required
-          className="flex-1 px-5 py-3 bg-gray-800 border border-cyan-500/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-cyan-100 placeholder-cyan-500 shadow-inner transition"
-            />
-            <input
+          className="flex-1 px-5 py-3 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-200 text-gray-800 placeholder-gray-400 shadow-inner transition"
+        />
+        <input
           type="number"
           min={1}
           value={item.jumlah}
           onChange={(e) =>
-            handleMenuChange(index, "jumlah", e.target.value)
+        handleMenuChange(index, "jumlah", e.target.value)
           }
           required
-          className="w-28 px-4 py-3 bg-gray-800 border border-cyan-500/40 rounded-2xl focus:outline-none focus:ring-2 focus:ring-cyan-400 text-cyan-100 shadow-inner transition"
-            />
-            {menuItems.length > 1 && (
+          className="w-28 px-4 py-3 bg-white border border-gray-300 rounded-2xl focus:outline-none focus:ring-2 focus:ring-yellow-200 text-gray-800 shadow-inner transition"
+        />
+        {menuItems.length > 1 && (
           <button
-            type="button"
-            onClick={() => handleRemoveMenu(index)}
-            className="text-pink-500 hover:text-pink-400 font-bold text-2xl transition"
-            title="Hapus Menu"
+        type="button"
+        onClick={() => handleRemoveMenu(index)}
+        className="text-red-500 hover:text-red-400 font-bold text-2xl transition"
+        title="Hapus Menu"
           >
-            <span className="drop-shadow-lg">&times;</span>
+        <span className="drop-shadow-lg">&times;</span>
           </button>
-            )}
+        )}
           </div>
         </div>
           ))}
@@ -145,7 +145,7 @@ export default function Pemesanan() {
         <button
           type="button"
           onClick={handleAddMenu}
-          className="text-cyan-400 font-semibold hover:underline hover:text-cyan-300 transition"
+          className="text-yellow-700 font-semibold hover:underline hover:text-yellow-800 transition"
         >
           + Tambah Menu
         </button>
@@ -153,7 +153,7 @@ export default function Pemesanan() {
 
           <button
         type="submit"
-        className="w-full py-3 px-6 bg-gradient-to-r from-cyan-500 via-blue-600 to-purple-700 text-white font-bold rounded-2xl shadow-lg hover:from-cyan-400 hover:to-purple-600 hover:scale-105 transition-all duration-300 tracking-widest"
+        className="w-full py-3 px-6 bg-gradient-to-r from-yellow-50 via-orange-50 to-brown-100 text-gray-800 font-bold rounded-2xl shadow-lg hover:from-yellow-100 hover:to-orange-100 hover:scale-105 transition-all duration-300 tracking-widest"
           >
         Pesan Sekarang
           </button>
