@@ -7,6 +7,8 @@ interface MenuItem {
   jumlah: number;
 }
 
+const BACKEND_URL = "http://localhost:3001/api/pesanan";
+
 export default function Pemesanan() {
   const [namaPemesan, setNamaPemesan] = useState("");
   const [menuItems, setMenuItems] = useState<MenuItem[]>([
@@ -23,37 +25,46 @@ export default function Pemesanan() {
     setMenuItems(updatedItems);
   };
 
+    const simpanData = async (item: MenuItem) => {
+    const response = await fetch(BACKEND_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        nama_pemesan: namaPemesan,
+        nama_menu: item.namaMenu,
+        jumlah: item.jumlah,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Gagal menyimpan ke server.");
+    }
+
+    const result = await response.json();
+
+    if (result.metaData?.error !== 0) {
+      throw new Error(result.metaData?.message || "Terjadi kesalahan.");
+    }
+
+    return result;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     try {
       for (const item of menuItems) {
-        const response = await fetch("/api/pesanan", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            nama_pemesan: namaPemesan,
-            nama_menu: item.namaMenu,
-            jumlah: item.jumlah,
-          }),
-        });
-
-        const result = await response.json();
-
-        if (!response.ok || result.metaData?.error !== 0) {
-          alert(`Gagal menyimpan pesanan: ${result.metaData?.message}`);
-          return;
-        }
+        await simpanData(item);
       }
 
       alert("Pesanan berhasil dikirim!");
-
       setNamaPemesan("");
       setMenuItems([{ namaMenu: "", jumlah: 1 }]);
-    } catch (error) {
-      console.error("Terjadi kesalahan:", error);
-      alert("Gagal menghubungi server.");
+    } catch (error: any) {
+      console.error("Error:", error);
+      alert("Gagal menyimpan pesanan: " + error.message);
     }
   };
 
