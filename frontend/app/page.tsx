@@ -12,6 +12,7 @@ export default function HomePage() {
          alt="Warmaskin Coffee"
           width={600}
           height={400}
+          className="rounded-2xl shadow-lg object-cover w-full h-auto"
         />
       </div>
       <div>
