@@ -6,9 +6,9 @@ export default function HomePage() {
   return (
   <div  className="space-y-16 p-6 md:p-12">
     <div className="flex flex-col md:flex-row items-center gap-8">
-      <div>
+      <div className="w-full md:w-1/2">
         <Image
-         src="/warmaskin.png"
+         src="/home.JPG"
          alt="Warmaskin Coffee"
           width={600}
           height={400}
