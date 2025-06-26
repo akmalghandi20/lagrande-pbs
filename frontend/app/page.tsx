@@ -19,12 +19,13 @@ export default function HomePage() {
           Warmaskin Coffe
         </h1>
         <p>
-
+          Nikmati secangkir kopi terbaik dari biji pilihan, diseduh dengan cinta di Warmaskin Coffee.
+            Tempat nongkrong yang nyaman, cocok untuk kerja, santai, maupun kumpul bareng teman
         </p>
         <div>
           <div>
             <h2>
-
+              Jam Operasional
             </h2>
             <ul>
               <li>Senin - Sabtu : 08.00 - 10.00</li>
