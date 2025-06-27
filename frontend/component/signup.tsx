@@ -67,7 +67,7 @@ export default function SignUpForm({ onSignUp }: SignUpProps) {
         Password
         </label>
         <input
-        type="text"
+        type="password"
         placeholder="Masukan Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
