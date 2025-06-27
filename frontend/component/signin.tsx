@@ -18,16 +18,52 @@ export default function SignIn() {
     }
   }, []);
 
-  function handleLogin(user: string, pass: string) {
-    setUsername(user);
-    setIsLoggedIn(true);
-    setShowModal(false);
-    localStorage.setItem("username", user); 
+  async function handleLogin(user: string, pass: string) {
+    try{
+      const res = await fetch("/api/user");
+      const result = await res.json();
+
+      const userData = result.data_user?.find((u: any) => u.username === user);
+      if (!userData) {
+        alert("Username tidak ditemukan");
+        return;
+      }
+      setUsername(user);
+      setIsLoggedIn(true);
+      setShowModal(false);
+      localStorage.setItem("username", user); 
+    } catch (error) {
+      console.error("Login error:", error);
+      alert("Terjadi kesalahan saat login.");
+    }
+
   }
 
-  function handleSignUp(user: string, pass: string) {
-    alert(`Akun untuk ${user} berhasil Dibuat}!`);
-    setShowSignUp(false);
+  async function handleSignUp(user: string, pass: string) {
+    try{
+      const res = await fetch("/api/user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          nama_value: user,
+          email_value: `${user}@mail.com`,
+          username_value: user,
+          password_value: pass,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        alert(`Akun untuk ${user} berhasil dibuat!`);
+        setShowSignUp(false);
+      } else {
+        alert(data.metaData?.message || "Gagal daftar");
+      }
+    }catch (error) {
+      console.error("Signup error:", error);
+      alert("Terjadi kesalahan saat daftar.");
+    }
   }
 
   function handleLogout() {
