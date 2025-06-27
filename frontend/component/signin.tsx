@@ -19,47 +19,68 @@ export default function SignIn() {
   }, []);
 
   async function handleLogin(user: string, pass: string) {
-    try{
-      const res = await fetch("/api/user");
+    if (!user || !pass) {
+      alert("Username dan password wajib diisi.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:3001/api/user");
       const result = await res.json();
 
-      const userData = result.data_user?.find((u: any) => u.username === user);
+      const userData = result.data_user?.find(
+        (u: any) => u.username === user && u.password === pass
+      );
+
       if (!userData) {
-        alert("Username tidak ditemukan");
+        alert("Username atau password salah");
         return;
       }
+
       setUsername(user);
       setIsLoggedIn(true);
       setShowModal(false);
-      localStorage.setItem("username", user); 
+      localStorage.setItem("username", user);
     } catch (error) {
       console.error("Login error:", error);
       alert("Terjadi kesalahan saat login.");
     }
   }
 
-  async function handleSignUp(username: string, password: string, nama: string, email: string) {
-    try{
-      const res = await fetch("/api/user", {
+  // handleSignUp menerima parameter tambahan jika SignUpForm mengirimkannya
+  async function handleSignUp(
+    user: string,
+    pass: string,
+    nama?: string,
+    email?: string
+  ) {
+    if (!user || !pass) {
+      alert("Username dan password wajib diisi.");
+      return;
+    }
+
+    try {
+      const res = await fetch("http://localhost:3001/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nama_value: nama,
-          email_value: email,
-          username_value: username,
-          password_value: password,
+          nama_value: nama || user,
+          email_value: email || `${user}@mail.com`,
+          username_value: user,
+          password_value: pass,
         }),
       });
 
       const data = await res.json();
+      console.log("Signup response:", data);
 
       if (res.ok) {
-        alert(`Akun untuk ${username} berhasil dibuat!`);
+        alert(`Akun untuk ${user} berhasil dibuat!`);
         setShowSignUp(false);
       } else {
         alert(data.metaData?.message || "Gagal daftar");
       }
-    }catch (error) {
+    } catch (error) {
       console.error("Signup error:", error);
       alert("Terjadi kesalahan saat daftar.");
     }
@@ -75,9 +96,7 @@ export default function SignIn() {
     <div className="relative">
       {isLoggedIn ? (
         <div className="flex items-center space-x-4">
-          <span className="text-gray-800 font-semibold">
-            Halo {username}
-          </span>
+          <span className="text-gray-800 font-semibold">Halo {username}</span>
           <button
             onClick={handleLogout}
             className="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600"
@@ -123,9 +142,10 @@ export default function SignIn() {
                     <LoginForm onLogin={handleLogin} />
                     <p className="mt-4 text-center">
                       Belum punya akun?{" "}
-                      <button onClick={() => setShowSignUp(true)}
+                      <button
+                        onClick={() => setShowSignUp(true)}
                         className="text-blue-600 hover:underline"
-                        >
+                      >
                         Buat Akun
                       </button>
                     </p>
