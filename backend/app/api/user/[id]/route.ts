@@ -189,7 +189,7 @@ export const PUT = async (
       nama: nama_value,
       username: username_value,
       // tambahkan password yang sudah dienkripsi
-      password: setBycrypt(password_value),
+      password: password_value,
     },
   });
 
