@@ -28,12 +28,15 @@ export default function SignIn() {
       const res = await fetch("http://localhost:3001/api/user");
       const result = await res.json();
 
-      const userData = result.data_user?.find(
-        (u: any) => u.username === user && u.password === pass
-      );
+      const userData = result.data_user?.find((u: any) => u.username === user);
 
       if (!userData) {
-        alert("Username atau password salah");
+        alert("Gagal login, akun belum terdaftar");
+        return;
+      }
+
+      if (userData.password !== pass) {
+        alert("Password salah");
         return;
       }
 
@@ -47,7 +50,6 @@ export default function SignIn() {
     }
   }
 
-  // handleSignUp menerima parameter tambahan jika SignUpForm mengirimkannya
   async function handleSignUp(
     user: string,
     pass: string,
