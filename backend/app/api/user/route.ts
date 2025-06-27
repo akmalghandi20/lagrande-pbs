@@ -73,7 +73,7 @@ export const POST = async (request: NextRequest) => {
       nama: nama_value,
       email: email_value,
       username: username_value,
-      password: setBycrypt(password_value),
+      password: password_value,
     },
   });
 
