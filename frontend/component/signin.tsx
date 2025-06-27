@@ -36,26 +36,25 @@ export default function SignIn() {
       console.error("Login error:", error);
       alert("Terjadi kesalahan saat login.");
     }
-
   }
 
-  async function handleSignUp(user: string, pass: string) {
+  async function handleSignUp(username: string, password: string, nama: string, email: string) {
     try{
       const res = await fetch("/api/user", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          nama_value: user,
-          email_value: `${user}@mail.com`,
-          username_value: user,
-          password_value: pass,
+          nama_value: nama,
+          email_value: email,
+          username_value: username,
+          password_value: password,
         }),
       });
 
       const data = await res.json();
 
       if (res.ok) {
-        alert(`Akun untuk ${user} berhasil dibuat!`);
+        alert(`Akun untuk ${username} berhasil dibuat!`);
         setShowSignUp(false);
       } else {
         alert(data.metaData?.message || "Gagal daftar");
