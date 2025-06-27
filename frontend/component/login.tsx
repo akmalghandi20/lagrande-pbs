@@ -9,6 +9,7 @@ interface LoginProps {
 export default function LoginForm({ onLogin }: LoginProps) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -34,18 +35,31 @@ export default function LoginForm({ onLogin }: LoginProps) {
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
-        <div className="mb-4">
+        <div className="mb-4 relative">
           <label className="block text-sm font-medium text-gray-600 mb-1">
             Password
           </label>
           <input
-            type="password"
-            placeholder="Password"
+            type={showPassword ? "text" : "password"}
+            placeholder="Masukan Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
+          <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-3 top-9 cursor-pointer p-1 bg-transparent hover:bg-gray-200 rounded-full focus:outline-none"
+            tabIndex={-1}
+            aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+          >
+            <img
+              src={showPassword ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
+              alt={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+              className="w-5 h-5"
+            />
+          </button>
         </div>
         <button
           type="submit"

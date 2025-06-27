@@ -80,14 +80,19 @@ export default function SignUpForm({ onSignUp }: SignUpProps) {
             required
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
-          <span
-            onClick={() => setShowPassword(!showPassword)}
-            className="absolute right-3 top-[38px] cursor-pointer text-xl"
-            title={showPassword ? "Sembunyikan" : "Lihat Password"}
-            style={{ userSelect: "none" }}
-          >
-            {showPassword ? "👁️" : "👁️"}
-          </span>
+            <button
+            type="button"
+            onClick={() => setShowPassword((prev) => !prev)}
+            className="absolute right-3 top-9 cursor-pointer p-1 bg-transparent hover:bg-gray-200 rounded-full focus:outline-none"
+            tabIndex={-1}
+            aria-label={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+            >
+            <img
+              src={showPassword ? "/eye-solid.svg" : "/eye-slash-solid.svg"}
+              alt={showPassword ? "Sembunyikan password" : "Tampilkan password"}
+              className="w-5 h-5"
+            />
+            </button>
         </div>
         <button
           type="submit"
