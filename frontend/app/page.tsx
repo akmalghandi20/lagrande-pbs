@@ -42,9 +42,9 @@ export default function HomePage() {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-10">
           {[
-            { name: "Americano", img: "/home.JPG" },
-            { name: "Kopi Susu", img: "/home.JPG" },
-            { name: "Latte", img: "/home.JPG" },
+            { name: "Americano", img: "/americano.jpg" },
+            { name: "Kopi Susu", img: "/kopsus.jpg" },
+            { name: "Latte", img: "/latte.jpg" },
           ].map((item) => (
             <div
               key={item.name}
