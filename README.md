@@ -1,10 +1,19 @@
-cloning repository menggunakan terminal  dengan perintah seperti berikut : 
-git clone https://github.com/
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-Seletah melakukan cloning, buka projek dan masukan kode berikut kedalam terminal: 
+## Setup Project
+Cloning Repository menggunakan terminal dengan perintah berikut :
+
+```bash
+git clone https://github.com/akmalghandi20/lagrande-pbs.git
+```
+
+Setelah proses cloning dilakukan, buka project dan jalankan perintah berikut menggunakan terminal :
+```bash
 npm i
+```
 
-Lalu buat folder bernama nama .env pada backend dengan isi kode sebagai berikut :
+Setelah melakukan "npm i" buat file .env di folder project dan buat kode di dalamnya sebagai berikut :
+```bash
 # Environment variables declared in this file are automatically made available to Prisma.
 # See the documentation for more detail: https://pris.ly/d/prisma-schema#accessing-environment-variables-from-the-schema
 
@@ -31,3 +40,16 @@ PESANAN_UPDATE_MESSAGE="Pesanan Berhasil Diupdate !!!"
 PESANAN_DELETED_MESSAGE="Pesanan Berhasil Dihapus !!!"
 
 PARAMETER_MUST_BE_NUMERIC_MESSAGE="Parameter Harus Angka !!!"
+
+
+NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="dtwz8elgk"
+```
+Running project dengan perintah berikut menggunakan terminal :
+```bash
+npm run dev
+```
+
+Buka browser dan masukkan url berikut : 
+```bash
+http://localhost:3000
+```
